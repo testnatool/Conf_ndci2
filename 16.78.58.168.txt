@@ -691,7 +691,7 @@ line vty 16 1510
  password admin
 !
 !
-ntp clock-period 17180088
+ntp clock-period 17180087
 ntp server 16.110.135.123
 no cns aaa enable
 end
