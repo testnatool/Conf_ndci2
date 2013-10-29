@@ -1,0 +1,251 @@
+
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname WS-3560-24PS
+!
+enable secret 5 $1$s2C1$PhruEnYPtok7t1btfeguu1
+!
+username manager privilege 15 password 0 rnetpa55
+username sm_manager privilege 15 password 0 rnetpa55
+username test_user_sm password 0 12345
+no aaa new-model
+ip subnet-zero
+ip routing
+ip domain-name test.dom
+!
+ip vrf test
+ description test
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+no spanning-tree vlan 1-2
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+interface Loopback1
+ no ip address
+ shutdown
+!
+interface Loopback20
+ no ip address
+!
+interface Loopback22
+ no ip address
+!
+interface Loopback23
+ description aaa
+ no ip address
+!
+interface Loopback144
+ no ip address
+ ipv6 address 2000::AAAA/128
+!
+interface Port-channel1
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/1
+ description demo
+ switchport mode access
+!
+interface FastEthernet0/2
+ switchport mode dynamic desirable
+ duplex half
+!
+interface FastEthernet0/3
+ description demo
+ no switchport
+ ip address 10.10.10.10 255.0.0.0
+!
+interface FastEthernet0/4
+ no switchport
+ ip address 20.1.1.1 255.0.0.0
+ ip access-group 101 in
+ ip access-group 101 out
+!
+interface FastEthernet0/5
+ no switchport
+ ip address 30.1.1.1 255.0.0.0
+ shutdown
+!
+interface FastEthernet0/6
+ description demo
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/7
+ no switchport
+ ip address 40.1.1.1 255.255.255.0
+ shutdown
+!
+interface FastEthernet0/8
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/9
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/10
+ no switchport
+ no ip address
+ ipv6 address FEC0:BBAC:CCAA:CCAA:DDDD:ABCD:DEFE:FFFF/64
+!
+interface FastEthernet0/11
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/12
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/13
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/14
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/15
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/16
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/17
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/18
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/19
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/20
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/21
+ switchport mode dynamic desirable
+!
+interface FastEthernet0/22
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 2
+ switchport mode trunk
+!
+interface FastEthernet0/23
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1
+ switchport mode trunk
+!
+interface FastEthernet0/24
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/1
+ switchport mode dynamic desirable
+!
+interface GigabitEthernet0/2
+ switchport mode dynamic desirable
+!
+interface Vlan1
+ ip address 16.78.58.44 255.255.240.0
+ ipv6 address autoconfig
+ ipv6 enable
+!
+interface Vlan2
+ no ip address
+!
+router ospf 1
+ log-adjacency-changes
+ network 20.0.0.0 0.255.255.255 area 0
+ network 30.0.0.0 0.255.255.255 area 0
+ network 40.0.0.0 0.255.255.255 area 0
+!
+ip default-gateway 16.78.48.1
+ip classless
+ip route 0.0.0.0 0.0.0.0 16.78.48.1
+ip http server
+!
+!
+logging 16.78.54.215
+logging 16.78.59.11
+logging 192.168.122.1
+logging 16.78.54.205
+logging 16.78.60.121
+logging 16.78.59.17
+logging 192.168.1.90
+access-list 110 deny   ip 16.78.59.8 0.0.0.7 host 16.78.58.44
+access-list 110 permit ip any any
+snmp-server engineID local AAAAAAAAAAAA
+snmp-server group SHGROUP v3 auth 
+snmp-server community private RW
+snmp-server community privatep RW
+snmp-server community privatep2 RW
+snmp-server community public RO
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps transceiver all
+snmp-server enable traps tty
+snmp-server enable traps eigrp
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf cisco-specific state-change nssa-trans-change
+snmp-server enable traps ospf cisco-specific state-change shamlink interface-old
+snmp-server enable traps ospf cisco-specific state-change shamlink neighbor
+snmp-server enable traps ospf cisco-specific errors
+snmp-server enable traps ospf cisco-specific retransmit
+snmp-server enable traps ospf cisco-specific lsa
+snmp-server enable traps cluster
+snmp-server enable traps entity
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps cpu threshold
+snmp-server enable traps power-ethernet group 1
+snmp-server enable traps power-ethernet police
+snmp-server enable traps vtp
+snmp-server enable traps vlancreate
+snmp-server enable traps vlandelete
+snmp-server enable traps flash insertion removal
+snmp-server enable traps port-security
+snmp-server enable traps bgp
+snmp-server enable traps cef resource-failure peer-state-change peer-fib-state-change inconsistency
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps config-ctid
+snmp-server enable traps hsrp
+snmp-server enable traps ipmulticast
+snmp-server enable traps msdp
+snmp-server enable traps pim neighbor-change rp-mapping-change invalid-pim-message
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps syslog
+snmp-server enable traps bulkstat collection transfer
+snmp-server enable traps rtr
+snmp-server enable traps errdisable
+snmp-server enable traps mac-notification
+snmp-server enable traps vlan-membership
+tacacs-server host 16.53.236.225
+no tacacs-server directed-request
+tacacs-server key opsware
+!
+control-plane
+!
+banner motd BANNNNNNNNNNERT
+!
+line con 0
+line vty 0 4
+ session-timeout 30 
+ login local
+ transport preferred telnet
+ transport input telnet
+line vty 5 15
+ session-timeout 30 
+ login local
+ transport preferred telnet
+ transport input all
+!
+end

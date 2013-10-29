@@ -1,6 +1,6 @@
 
 !
-! Last configuration change at 22:36:06 UTC Thu Oct 24 2013 by Manager
+! Last configuration change at 17:03:20 UTC Mon Oct 28 2013 by Manager
 !
 version 15.1
 service timestamps debug datetime msec localtime show-timezone
@@ -266,7 +266,7 @@ interface FastEthernet0/0
  speed 100
 !
 interface FastEthernet0/1
- description KEWL
+ description kewler
  mac-address 0000.0000.0001
  no ip address
  ip access-group 20 in

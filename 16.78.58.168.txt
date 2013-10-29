@@ -1,7 +1,7 @@
 
 !
-! Last configuration change at 02:04:09 PDT Sat Oct 26 2013 by Manager
-! NVRAM config last updated at 02:04:25 PDT Sat Oct 26 2013 by Manager
+! Last configuration change at 01:03:50 PDT Mon Oct 28 2013 by Manager
+! NVRAM config last updated at 03:12:27 PDT Mon Oct 28 2013 by Manager
 !
 upgrade fpd auto
 version 12.2
@@ -226,7 +226,7 @@ interface GigabitEthernet11/8
 interface FastEthernet12/1
  description $&>
  switchport
- switchport access vlan 139
+ switchport access vlan 502
  switchport trunk encapsulation dot1q
  switchport mode access
  mac-address 0018.7424.aaaa
@@ -644,6 +644,8 @@ logging 1.1.1.108
 logging 1.1.1.109
 logging 1.1.1.110
 logging 16.78.59.241
+logging 16.78.60.113
+logging 226.176.91.201
 !
 route-map testmap permit 5
  description test for parsing vrf releated
